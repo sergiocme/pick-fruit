@@ -55,13 +55,13 @@
     function renderScreen() {
       clearScreen();
 
-      for (playerKey in game.players) {
+      for (const playerKey in game.players) {
         const player = game.players[playerKey];
         context.fillStyle = 'black';
         context.fillRect(player.positionX, player.positionY, 1, 1);
       }
 
-      for (fruitKey in game.fruits) {
+      for (const fruitKey in game.fruits) {
         const fruit = game.fruits[fruitKey];
         context.fillStyle = 'green';
         context.fillRect(fruit.positionX, fruit.positionY, 1, 1);
