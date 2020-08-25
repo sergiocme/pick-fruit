@@ -29,46 +29,63 @@
   <canvas id="screen" width="10" height="10"></canvas>
 
   <script>
-    const screen = document.getElementById('screen');
-    const context = screen.getContext('2d');
+    function createGame() {
+      const screen = document.getElementById('screen');
+      const context = screen.getContext('2d');
 
-    const game = {
-      players: {
-        'player1': { positionX: 1, positionY: 1 },
-        'player2': { positionX: 9, positionY: 9 },
-      },
-      fruits: {
-        'fruit1': { positionX: 3, positionY: 1 },
-      },
-    };
+      const state = {
+        players: {
+          'player1': { positionX: 1, positionY: 1 },
+          'player2': { positionX: 9, positionY: 9 },
+        },
+        fruits: {
+          'fruit1': { positionX: 3, positionY: 1 },
+        },
+      };
 
-    document.addEventListener('keydown', handleKeydown);
-    function handleKeydown(event) {
-      console.log(event.key);
-    }
-
-    function clearScreen() {
-      context.clearRect(0, 0, 10, 10);
-    }
-
-    renderScreen();
-    function renderScreen() {
-      clearScreen();
-
-      for (const playerKey in game.players) {
-        const player = game.players[playerKey];
-        context.fillStyle = 'black';
-        context.fillRect(player.positionX, player.positionY, 1, 1);
+      function clearScreen() {
+        context.clearRect(0, 0, 10, 10);
       }
 
-      for (const fruitKey in game.fruits) {
-        const fruit = game.fruits[fruitKey];
-        context.fillStyle = 'green';
-        context.fillRect(fruit.positionX, fruit.positionY, 1, 1);
+      function renderScreen() {
+        clearScreen();
+
+        for (const playerKey in state.players) {
+          const player = state.players[playerKey];
+          context.fillStyle = 'black';
+          context.fillRect(player.positionX, player.positionY, 1, 1);
+        }
+
+        for (const fruitKey in state.fruits) {
+          const fruit = state.fruits[fruitKey];
+          context.fillStyle = 'green';
+          context.fillRect(fruit.positionX, fruit.positionY, 1, 1);
+        }
+
+        requestAnimationFrame(renderScreen);
       }
 
-      requestAnimationFrame(renderScreen);
+      return {
+        state,
+        renderScreen,
+      };
     }
+
+    function createInput() {
+      document.addEventListener('keydown', handleKeydown);
+      function handleKeydown(event) {
+        console.log(event.key);
+      }
+
+      return {
+        handleKeydown,
+      };
+    }
+
+    const game = createGame();
+    const input = createInput();
+
+    game.renderScreen();
   </script>
 </body>
 </html>
