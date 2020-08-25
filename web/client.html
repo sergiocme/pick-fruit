@@ -42,6 +42,11 @@
       },
     };
 
+    document.addEventListener('keydown', handleKeydown);
+    function handleKeydown(event) {
+      console.log(event.key);
+    }
+
     function clearScreen() {
       context.clearRect(0, 0, 10, 10);
     }
