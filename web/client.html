@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pick Fruit</title>
+
+  <style>
+    html,
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    #screen {
+      width: 400px;
+      height: 400px;
+      border: 10px solid #ccc;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="screen" width="10" height="10"></canvas>
+
+  <script>
+    const screen = document.getElementById('screen');
+    const context = screen.getContext('2d');
+
+    const game = {
+      players: {
+        'player1': { positionX: 1, positionY: 1 },
+        'player2': { positionX: 9, positionY: 9 },
+      },
+      fruits: {
+        'fruit1': { positionX: 3, positionY: 1 },
+      },
+    };
+
+    function clearScreen() {
+      context.fillStyle = 'white';
+      context.fillRect(0, 0, 10, 10);
+    }
+
+    renderScreen();
+    function renderScreen() {
+      clearScreen();
+
+      for (playerKey in game.players) {
+        const player = game.players[playerKey];
+        context.fillStyle = 'black';
+        context.fillRect(player.positionX, player.positionY, 1, 1);
+      }
+
+      for (fruitKey in game.fruits) {
+        const fruit = game.fruits[fruitKey];
+        context.fillStyle = 'green';
+        context.fillRect(fruit.positionX, fruit.positionY, 1, 1);
+      }
+
+      requestAnimationFrame(renderScreen);
+    }
+  </script>
+</body>
+</html>
