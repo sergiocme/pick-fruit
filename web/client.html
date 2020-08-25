@@ -76,7 +76,12 @@
       }
 
       function movimentValidator(updatedPlayer) {
-        return true;
+        for (const limit in state.fieldLimit) {
+          validX = updatedPlayer.positionX > -1 && updatedPlayer.positionX < 10 ? true : false;
+          validY = updatedPlayer.positionY > -1 && updatedPlayer.positionY < 10 ? true : false;
+        }
+
+        return (validX && validY);
       }
 
       function movePlayer({ pressedKey }) {
