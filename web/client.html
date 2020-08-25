@@ -41,6 +41,12 @@
         fruits: {
           'fruit1': { positionX: 3, positionY: 1 },
         },
+        fieldLimit: {
+          topEdge: 0,
+          rightEdge: 9,
+          bottomEdge: 9,
+          leftEdge: 0,
+        },
       };
 
       function clearScreen() {
@@ -65,9 +71,94 @@
         requestAnimationFrame(renderScreen);
       }
 
+      function clearInRect(position) {
+        context.clearRect(position.positionX, position.positionY, 1, 1);
+      }
+
+      function movimentValidator(updatedPlayer) {
+        return true;
+      }
+
+      function movePlayer({ pressedKey }) {
+        const player = state.players['player1'];
+        const moves = {
+          ArrowUp: {
+            movement(player) {
+              const updatedPlayer = {
+                ...player,
+                positionY: player.positionY - 1,
+              };
+
+              const validMove = movimentValidator(updatedPlayer)
+              if (validMove) {
+                clearInRect({
+                  positionX: player.positionX,
+                  positionY: player.positionY,
+                });
+                state.players['player1'] = updatedPlayer;
+              }
+            },
+          },
+          ArrowRight: {
+            movement(player) {
+              const updatedPlayer = {
+                ...player,
+                positionX: player.positionX + 1,
+              };
+
+              const validMove = movimentValidator(updatedPlayer)
+              if (validMove) {
+                clearInRect({
+                  positionX: player.positionX,
+                  positionY: player.positionY,
+                });
+                state.players['player1'] = updatedPlayer;
+              }
+            },
+          },
+          ArrowDown: {
+            movement(player) {
+              const updatedPlayer = {
+                ...player,
+                positionY: player.positionY + 1,
+              };
+
+              const validMove = movimentValidator(updatedPlayer)
+              if (validMove) {
+                clearInRect({
+                  positionX: player.positionX,
+                  positionY: player.positionY,
+                });
+                state.players['player1'] = updatedPlayer;
+              }
+            },
+          },
+          ArrowLeft: {
+            movement(player) {
+              const updatedPlayer = {
+                ...player,
+                positionX: player.positionX - 1,
+              };
+
+              const validMove = movimentValidator(updatedPlayer)
+              if (validMove) {
+                clearInRect({
+                  positionX: player.positionX,
+                  positionY: player.positionY,
+                });
+                state.players['player1'] = updatedPlayer;
+              }
+            },
+          },
+        };
+
+        moves[pressedKey].movement(player);
+      }
+
       return {
         state,
         renderScreen,
+        movePlayer,
       };
     }
 
@@ -100,6 +191,7 @@
 
     const game = createGame();
     const input = createInput();
+    input.subcribe(game.movePlayer);
 
     game.renderScreen();
   </script>
