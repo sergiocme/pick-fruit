@@ -100,7 +100,7 @@
             const fruit = state.fruits[fruitKey];
 
             if (fruit.positionX === player.positionX && fruit.positionY === player.positionY) {
-              console.log('Fruit collision');
+              removeFruit({ id: fruitKey });
             }
           }
         }
