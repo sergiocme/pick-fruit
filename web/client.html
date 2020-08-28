@@ -55,6 +55,17 @@
         delete state.players[id];
       }
 
+      function addFruit({ id, positionX, positionY }) {
+        state.fruits[id] = {
+          positionX,
+          positionY,
+        };
+      }
+
+      function removeFruit({ id }) {
+        delete state.fruits[id];
+      }
+
       function clearScreen() {
         context.clearRect(0, 0, 10, 10);
       }
@@ -174,6 +185,8 @@
         movePlayer,
         addPlayer,
         removePlayer,
+        addFruit,
+        removeFruit,
       };
     }
 
