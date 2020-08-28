@@ -92,16 +92,14 @@
         context.clearRect(position.positionX, position.positionY, 1, 1);
       }
 
-      function checkFruitCollision() {
-        for (const playerKey in state.players) {
-          const player = state.players[playerKey];
+      function checkFruitCollision({ id }) {
+        const player = state.players[id];
 
-          for (const fruitKey in state.fruits) {
-            const fruit = state.fruits[fruitKey];
+        for (const fruitKey in state.fruits) {
+          const fruit = state.fruits[fruitKey];
 
-            if (fruit.positionX === player.positionX && fruit.positionY === player.positionY) {
-              removeFruit({ id: fruitKey });
-            }
+          if (fruit.positionX === player.positionX && fruit.positionY === player.positionY) {
+            removeFruit({ id: fruitKey });
           }
         }
       }
@@ -190,7 +188,7 @@
 
         if (player && moves[pressedKey]) {
           moves[pressedKey].movement(player);
-          checkFruitCollision();
+          checkFruitCollision({ id: 'player1' });
         }
       }
 
