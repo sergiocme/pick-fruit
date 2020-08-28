@@ -92,6 +92,20 @@
         context.clearRect(position.positionX, position.positionY, 1, 1);
       }
 
+      function checkFruitCollision() {
+        for (const playerKey in state.players) {
+          const player = state.players[playerKey];
+
+          for (const fruitKey in state.fruits) {
+            const fruit = state.fruits[fruitKey];
+
+            if (fruit.positionX === player.positionX && fruit.positionY === player.positionY) {
+              console.log('Fruit collision');
+            }
+          }
+        }
+      }
+
       function movimentValidator(updatedPlayer) {
         for (const limit in state.fieldLimit) {
           validX = updatedPlayer.positionX > -1 && updatedPlayer.positionX < 10 ? true : false;
@@ -176,6 +190,7 @@
 
         if (player && moves[pressedKey]) {
           moves[pressedKey].movement(player);
+          checkFruitCollision();
         }
       }
 
