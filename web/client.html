@@ -104,7 +104,9 @@
         }
       }
 
-      function movimentValidator(updatedPlayer) {
+      function movementValidator(updatedPlayer) {
+        let validX = false;
+        let validY = false;
         for (const limit in state.fieldLimit) {
           validX = updatedPlayer.positionX > -1 && updatedPlayer.positionX < 10 ? true : false;
           validY = updatedPlayer.positionY > -1 && updatedPlayer.positionY < 10 ? true : false;
@@ -123,7 +125,7 @@
                 positionY: player.positionY - 1,
               };
 
-              const validMove = movimentValidator(updatedPlayer)
+              const validMove = movementValidator(updatedPlayer)
               if (validMove) {
                 clearInRect({
                   positionX: player.positionX,
@@ -140,7 +142,7 @@
                 positionX: player.positionX + 1,
               };
 
-              const validMove = movimentValidator(updatedPlayer)
+              const validMove = movementValidator(updatedPlayer)
               if (validMove) {
                 clearInRect({
                   positionX: player.positionX,
@@ -157,7 +159,7 @@
                 positionY: player.positionY + 1,
               };
 
-              const validMove = movimentValidator(updatedPlayer)
+              const validMove = movementValidator(updatedPlayer)
               if (validMove) {
                 clearInRect({
                   positionX: player.positionX,
@@ -174,7 +176,7 @@
                 positionX: player.positionX - 1,
               };
 
-              const validMove = movimentValidator(updatedPlayer)
+              const validMove = movementValidator(updatedPlayer)
               if (validMove) {
                 clearInRect({
                   positionX: player.positionX,
