@@ -29,6 +29,8 @@
   <canvas id="screen" width="10" height="10"></canvas>
 
   <script type="module">
+    import createInput from './inputFactory.js';
+
     function createGame() {
       const screen = document.getElementById('screen');
       const context = screen.getContext('2d');
@@ -205,35 +207,8 @@
       };
     }
 
-    function createInput() {
-      const state = {
-        observers: [],
-      };
-
-      function subcribe(observerFunction) {
-        state.observers.push(observerFunction);
-      }
-
-      function notifyAll(command) {
-        for (const observerFunction of state.observers) {
-          observerFunction(command);
-        }
-      }
-
-      document.addEventListener('keydown', handleKeydown);
-      function handleKeydown(event) {
-        notifyAll({
-          pressedKey: event.key,
-        });
-      }
-
-      return {
-        subcribe,
-      };
-    }
-
     const game = createGame();
-    const input = createInput();
+    const input = createInput(document);
     input.subcribe(game.movePlayer);
 
     game.addPlayer({
