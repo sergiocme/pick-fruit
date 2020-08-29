@@ -234,6 +234,17 @@
     const input = createInput();
     input.subcribe(game.movePlayer);
 
+    game.addPlayer({
+      id: 'player1',
+      positionX: 0,
+      positionY: 0,
+    });
+
+    game.addFruit({
+      id: 'fruit1',
+      positionX: 3,
+      positionY: 7,
+    });
     game.renderScreen();
   </script>
 </body>
