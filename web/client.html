@@ -30,11 +30,9 @@
 
   <script type="module">
     import createInput from './inputFactory.js';
+    import createCanvas from './canvasFactory.js';
 
     function createGame() {
-      const screen = document.getElementById('screen');
-      const context = screen.getContext('2d');
-
       const state = {
         players: {},
         fruits: {},
@@ -66,32 +64,6 @@
 
       function removeFruit({ id }) {
         delete state.fruits[id];
-      }
-
-      function clearScreen() {
-        context.clearRect(0, 0, 10, 10);
-      }
-
-      function renderScreen() {
-        clearScreen();
-
-        for (const playerKey in state.players) {
-          const player = state.players[playerKey];
-          context.fillStyle = 'black';
-          context.fillRect(player.positionX, player.positionY, 1, 1);
-        }
-
-        for (const fruitKey in state.fruits) {
-          const fruit = state.fruits[fruitKey];
-          context.fillStyle = 'green';
-          context.fillRect(fruit.positionX, fruit.positionY, 1, 1);
-        }
-
-        requestAnimationFrame(renderScreen);
-      }
-
-      function clearInRect(position) {
-        context.clearRect(position.positionX, position.positionY, 1, 1);
       }
 
       function checkFruitCollision({ id }) {
@@ -129,10 +101,6 @@
 
               const validMove = movementValidator(updatedPlayer)
               if (validMove) {
-                clearInRect({
-                  positionX: player.positionX,
-                  positionY: player.positionY,
-                });
                 state.players['player1'] = updatedPlayer;
               }
             },
@@ -146,10 +114,6 @@
 
               const validMove = movementValidator(updatedPlayer)
               if (validMove) {
-                clearInRect({
-                  positionX: player.positionX,
-                  positionY: player.positionY,
-                });
                 state.players['player1'] = updatedPlayer;
               }
             },
@@ -163,10 +127,6 @@
 
               const validMove = movementValidator(updatedPlayer)
               if (validMove) {
-                clearInRect({
-                  positionX: player.positionX,
-                  positionY: player.positionY,
-                });
                 state.players['player1'] = updatedPlayer;
               }
             },
@@ -180,10 +140,6 @@
 
               const validMove = movementValidator(updatedPlayer)
               if (validMove) {
-                clearInRect({
-                  positionX: player.positionX,
-                  positionY: player.positionY,
-                });
                 state.players['player1'] = updatedPlayer;
               }
             },
@@ -198,7 +154,6 @@
 
       return {
         state,
-        renderScreen,
         movePlayer,
         addPlayer,
         removePlayer,
@@ -210,6 +165,7 @@
     const game = createGame();
     const input = createInput(document);
     input.subcribe(game.movePlayer);
+    const canvas = createCanvas(document, game.state);
 
     game.addPlayer({
       id: 'player1',
@@ -222,7 +178,8 @@
       positionX: 3,
       positionY: 7,
     });
-    game.renderScreen();
+
+    canvas.startRender();
   </script>
 </body>
 </html>
