@@ -1,6 +1,9 @@
 const express = require('express');
 const http = require('http');
 
+const createGame = require('../web/gameFactory');
+const game = createGame();
+
 const app = express();
 const server = http.createServer(app);
 
