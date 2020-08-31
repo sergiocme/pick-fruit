@@ -1,7 +1,7 @@
-const express = require('express');
-const http = require('http');
+import express from 'express';
+import http from 'http';
 
-const createGame = require('../web/gameFactory');
+import createGame from '../web/gameFactory.js';
 const game = createGame();
 
 const app = express();
