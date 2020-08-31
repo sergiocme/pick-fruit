@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socketio from 'socket.io';
+import path from 'path';
 
 import createGame from '../web/gameFactory.js';
 const game = createGame();
@@ -11,7 +12,8 @@ const app = express();
 const server = http.createServer(app);
 const sockets = socketio(server);
 
-app.use(express.static('web'));
+const pathForWebClient = path.resolve(path.dirname(''), 'web');
+app.use(express.static(pathForWebClient));
 
 sockets.on('connection', (socket) => {
   console.log('socket: ', socket.id);
