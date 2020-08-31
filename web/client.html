@@ -24,6 +24,7 @@
       image-rendering: pixelated;
     }
   </style>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
   <canvas id="screen" width="10" height="10"></canvas>
@@ -39,6 +40,16 @@
     const canvas = createCanvas(document, game.state);
 
     canvas.startRender();
+
+    const socket = io();
+
+    socket.on('connect', () => {
+      console.log('socket: ', socket.id);
+    });
+
+    socket.on('state', (gameState) => {
+      game.setState(gameState);
+    })
   </script>
 </body>
 </html>
