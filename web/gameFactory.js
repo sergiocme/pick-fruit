@@ -10,6 +10,10 @@ export default function createGame() {
     },
   };
 
+  function setState(newState) {
+    Object.assign(state, newState);
+  }
+
   function addPlayer({ id, positionX, positionY }) {
     state.players[id] = {
       positionX,
@@ -120,6 +124,7 @@ export default function createGame() {
 
   return {
     state,
+    setState,
     movePlayer,
     addPlayer,
     removePlayer,
