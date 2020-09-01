@@ -27,8 +27,8 @@ export default function createGame() {
 
   function addFruit({ id, positionX, positionY }) {
     state.fruits[id] = {
-      positionX,
-      positionY,
+      positionX: positionX ? positionX : Math.floor(Math.random() * (state.fieldLimit.rightEdge + 1)),
+      positionY: positionY ? positionY : Math.floor(Math.random() * (state.fieldLimit.bottomEdge + 1)),
     };
   }
 

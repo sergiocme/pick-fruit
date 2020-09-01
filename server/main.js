@@ -6,7 +6,7 @@ import path from 'path';
 import createGame from '../web/gameFactory.js';
 const game = createGame();
 
-game.addFruit({ id: 'fruit1', positionX: 3, positionY: 3 });
+game.addFruit({ id: 'fruit1' });
 
 const app = express();
 const server = http.createServer(app);
