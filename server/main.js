@@ -17,7 +17,7 @@ app.use(express.static(pathForWebClient));
 
 sockets.on('connection', (socket) => {
   console.log('socket: ', socket.id);
-  game.addPlayer({ id: socket.id, positionX: 0, positionY: 0 });
+  game.addPlayer({ id: socket.id });
 
   socket.emit('state', game.state);
 });

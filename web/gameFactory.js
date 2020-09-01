@@ -16,8 +16,8 @@ export default function createGame() {
 
   function addPlayer({ id, positionX, positionY }) {
     state.players[id] = {
-      positionX,
-      positionY,
+      positionX: positionX ? positionX : Math.floor(Math.random() * (state.fieldLimit.rightEdge + 1)),
+      positionY: positionY ? positionY : Math.floor(Math.random() * (state.fieldLimit.bottomEdge + 1)),
     };
   }
 
