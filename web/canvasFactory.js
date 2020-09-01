@@ -19,7 +19,6 @@ export default function createCanvas(document, gameState, currentPlayerId) {
 
     if (currentPlayerId) {
       const player = gameState.players[currentPlayerId];
-      console.log('currentPlayerId: ', currentPlayerId);
       context.fillStyle = 'yellow';
       context.fillRect(player.positionX, player.positionY, 1, 1);
     }
