@@ -6,7 +6,9 @@ import path from 'path';
 import createGame from '../web/gameFactory.js';
 const game = createGame();
 
-game.addFruit({ id: 'fruit1' });
+setInterval(() => {
+  game.addFruit();
+}, 2000);
 
 const app = express();
 const server = http.createServer(app);
@@ -33,6 +35,8 @@ game.subcribe(({ type, updatedState }) => {
   if (type === 'add-player') {
     sockets.emit(type, updatedState);
   } else if (type === 'remove-fruit') {
+    sockets.emit(type, updatedState);
+  } else if (type === 'add-fruit') {
     sockets.emit(type, updatedState);
   }
 });

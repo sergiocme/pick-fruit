@@ -42,11 +42,16 @@ export default function createGame(socket) {
     delete state.players[id];
   }
 
-  function addFruit({ id, positionX, positionY }) {
+  function addFruit({ id, positionX, positionY } = { id: (Math.random() * 999999) }) {
     state.fruits[id] = {
       positionX: positionX ? positionX : Math.floor(Math.random() * (state.fieldLimit.rightEdge + 1)),
       positionY: positionY ? positionY : Math.floor(Math.random() * (state.fieldLimit.bottomEdge + 1)),
     };
+
+    notifyAll({
+      type: 'add-fruit',
+      updatedState: state.fruits,
+    });
   }
 
   function removeFruit({ id }) {
