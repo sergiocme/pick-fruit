@@ -10,6 +10,18 @@ export default function createGame() {
     },
   };
 
+  const observers = [];
+
+  function subcribe(observerFunction) {
+    observers.push(observerFunction);
+  }
+
+  function notifyAll(command) {
+    for (const observerFunction of observers) {
+      observerFunction(command);
+    }
+  }
+
   function setState(newState) {
     Object.assign(state, newState);
   }
@@ -19,6 +31,11 @@ export default function createGame() {
       positionX: positionX ? positionX : Math.floor(Math.random() * (state.fieldLimit.rightEdge + 1)),
       positionY: positionY ? positionY : Math.floor(Math.random() * (state.fieldLimit.bottomEdge + 1)),
     };
+
+    notifyAll({
+      type: 'add-player',
+      playersState: state.players,
+    });
   }
 
   function removePlayer({ id }) {
@@ -125,6 +142,7 @@ export default function createGame() {
   return {
     state,
     setState,
+    subcribe,
     movePlayer,
     addPlayer,
     removePlayer,
