@@ -45,7 +45,11 @@
 
     socket.on('state', (gameState) => {
       game.setState(gameState);
-    })
+    });
+
+    socket.on('add-player', (playersState) => {
+      game.setState({ players: playersState });
+    });
   </script>
 </body>
 </html>
