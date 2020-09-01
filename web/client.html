@@ -34,7 +34,7 @@
     import createCanvas from './canvasFactory.js';
     import createGame from './gameFactory.js';
 
-    const game = createGame();
+    let game;
     let input;
     let canvas;
 
@@ -44,6 +44,7 @@
       currentPlayerId = socket.id;
 
       input = createInput(document, currentPlayerId);
+      game = createGame(socket);
     });
 
     socket.on('init', (gameState) => {

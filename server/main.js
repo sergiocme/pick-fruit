@@ -23,6 +23,10 @@ sockets.on('connection', (socket) => {
   socket.on('disconnect', () => {
     game.removePlayer({ id: socket.id });
   });
+
+  socket.on('move-player', ({ pressedKey, currentPlayerId }) => {
+    game.movePlayer({ pressedKey, currentPlayerId });
+  });
 });
 
 game.subcribe(({ type, playersState }) => {

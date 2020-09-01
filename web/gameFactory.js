@@ -1,4 +1,4 @@
-export default function createGame() {
+export default function createGame(socket) {
   const state = {
     players: {},
     fruits: {},
@@ -136,6 +136,15 @@ export default function createGame() {
     if (player && moves[pressedKey]) {
       moves[pressedKey].movement(player);
       checkFruitCollision({ id: currentPlayerId });
+
+      if (socket) {
+        socket.emit('move-player', { pressedKey, currentPlayerId });
+      } else {
+        notifyAll({
+          type: 'add-player',
+          playersState: state.players,
+        });
+      }
     }
   }
 
