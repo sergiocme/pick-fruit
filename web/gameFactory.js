@@ -34,7 +34,7 @@ export default function createGame(socket) {
 
     notifyAll({
       type: 'add-player',
-      playersState: state.players,
+      updatedState: state.players,
     });
   }
 
@@ -61,6 +61,10 @@ export default function createGame(socket) {
 
       if (fruit.positionX === player.positionX && fruit.positionY === player.positionY) {
         removeFruit({ id: fruitKey });
+        notifyAll({
+          type: 'remove-fruit',
+          updatedState: state.fruits,
+        });
       }
     }
   }
@@ -142,7 +146,7 @@ export default function createGame(socket) {
       } else {
         notifyAll({
           type: 'add-player',
-          playersState: state.players,
+          updatedState: state.players,
         });
       }
     }

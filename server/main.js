@@ -29,8 +29,12 @@ sockets.on('connection', (socket) => {
   });
 });
 
-game.subcribe(({ type, playersState }) => {
-  sockets.emit(type, playersState);
+game.subcribe(({ type, updatedState }) => {
+  if (type === 'add-player') {
+    sockets.emit(type, updatedState);
+  } else if (type === 'remove-fruit') {
+    sockets.emit(type, updatedState);
+  }
 });
 
 server.listen(3000, () => {

@@ -59,6 +59,10 @@
     socket.on('add-player', (playersState) => {
       game.setState({ players: playersState });
     });
+
+    socket.on('remove-fruit', (fruitsState) => {
+      game.setState({ fruits: fruitsState });
+    });
   </script>
 </body>
 </html>
