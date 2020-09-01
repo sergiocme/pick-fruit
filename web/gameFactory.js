@@ -76,8 +76,8 @@ export default function createGame() {
     return (validX && validY);
   }
 
-  function movePlayer({ pressedKey }) {
-    const player = state.players['player1'];
+  function movePlayer({ pressedKey, currentPlayerId }) {
+    const player = state.players[currentPlayerId];
     const moves = {
       ArrowUp: {
         movement(player) {
@@ -88,7 +88,7 @@ export default function createGame() {
 
           const validMove = movementValidator(updatedPlayer)
           if (validMove) {
-            state.players['player1'] = updatedPlayer;
+            state.players[currentPlayerId] = updatedPlayer;
           }
         },
       },
@@ -101,7 +101,7 @@ export default function createGame() {
 
           const validMove = movementValidator(updatedPlayer)
           if (validMove) {
-            state.players['player1'] = updatedPlayer;
+            state.players[currentPlayerId] = updatedPlayer;
           }
         },
       },
@@ -114,7 +114,7 @@ export default function createGame() {
 
           const validMove = movementValidator(updatedPlayer)
           if (validMove) {
-            state.players['player1'] = updatedPlayer;
+            state.players[currentPlayerId] = updatedPlayer;
           }
         },
       },
@@ -127,7 +127,7 @@ export default function createGame() {
 
           const validMove = movementValidator(updatedPlayer)
           if (validMove) {
-            state.players['player1'] = updatedPlayer;
+            state.players[currentPlayerId] = updatedPlayer;
           }
         },
       },
@@ -135,7 +135,7 @@ export default function createGame() {
 
     if (player && moves[pressedKey]) {
       moves[pressedKey].movement(player);
-      checkFruitCollision({ id: 'player1' });
+      checkFruitCollision({ id: currentPlayerId });
     }
   }
 

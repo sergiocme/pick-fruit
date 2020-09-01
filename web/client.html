@@ -35,14 +35,15 @@
     import createGame from './gameFactory.js';
 
     const game = createGame();
-    const input = createInput(document);
+    let input;
     let canvas;
-    input.subcribe(game.movePlayer);
 
     const socket = io();
     let currentPlayerId;
     socket.on('connect', () => {
       currentPlayerId = socket.id;
+
+      input = createInput(document, currentPlayerId);
     });
 
     socket.on('init', (gameState) => {
@@ -50,6 +51,8 @@
 
       canvas = createCanvas(document, game.state, currentPlayerId);
       canvas.startRender();
+
+      input.subcribe(game.movePlayer);
     });
 
     socket.on('add-player', (playersState) => {

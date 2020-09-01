@@ -1,4 +1,4 @@
-export default function createInput(document) {
+export default function createInput(document, currentPlayerId) {
   const state = {
     observers: [],
   };
@@ -17,6 +17,7 @@ export default function createInput(document) {
   function handleKeydown(event) {
     notifyAll({
       pressedKey: event.key,
+      currentPlayerId,
     });
   }
 
