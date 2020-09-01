@@ -19,6 +19,10 @@ sockets.on('connection', (socket) => {
   game.addPlayer({ id: socket.id });
 
   socket.emit('state', game.state);
+
+  socket.on('disconnect', () => {
+    game.removePlayer({ id: socket.id });
+  });
 });
 
 server.listen(3000, () => {
