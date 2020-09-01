@@ -18,7 +18,7 @@ app.use(express.static(pathForWebClient));
 sockets.on('connection', (socket) => {
   game.addPlayer({ id: socket.id });
 
-  socket.emit('state', game.state);
+  socket.emit('init', game.state);
 
   socket.on('disconnect', () => {
     game.removePlayer({ id: socket.id });

@@ -1,4 +1,4 @@
-export default function createCanvas(document, gameState) {
+export default function createCanvas(document, gameState, currentPlayerId) {
   const canvasElement = document.getElementById('screen');
   const context = canvasElement.getContext('2d');
 
@@ -15,6 +15,13 @@ export default function createCanvas(document, gameState) {
       const fruit = gameState.fruits[fruitKey];
       context.fillStyle = 'green';
       context.fillRect(fruit.positionX, fruit.positionY, 1, 1);
+    }
+
+    if (currentPlayerId) {
+      const player = gameState.players[currentPlayerId];
+      console.log('currentPlayerId: ', currentPlayerId);
+      context.fillStyle = 'yellow';
+      context.fillRect(player.positionX, player.positionY, 1, 1);
     }
 
     requestAnimationFrame(startRender);

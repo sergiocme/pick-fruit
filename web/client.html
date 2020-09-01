@@ -36,15 +36,20 @@
 
     const game = createGame();
     const input = createInput(document);
+    let canvas;
     input.subcribe(game.movePlayer);
-    const canvas = createCanvas(document, game.state);
-
-    canvas.startRender();
 
     const socket = io();
+    let currentPlayerId;
+    socket.on('connect', () => {
+      currentPlayerId = socket.id;
+    });
 
-    socket.on('state', (gameState) => {
+    socket.on('init', (gameState) => {
       game.setState(gameState);
+
+      canvas = createCanvas(document, game.state, currentPlayerId);
+      canvas.startRender();
     });
 
     socket.on('add-player', (playersState) => {
