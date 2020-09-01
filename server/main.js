@@ -16,7 +16,6 @@ const pathForWebClient = path.resolve(path.dirname(''), 'web');
 app.use(express.static(pathForWebClient));
 
 sockets.on('connection', (socket) => {
-  console.log('socket: ', socket.id);
   game.addPlayer({ id: socket.id });
 
   socket.emit('state', game.state);
